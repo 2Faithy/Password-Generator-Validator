@@ -1,0 +1,53 @@
+# Password Generator
+
+import random
+
+lower = 'abcdefghijklm'
+upper = 'NOPQRSTUVWXYZ'
+numbers = '01234'
+special_characters = '$%*.^#@/?'
+
+string = lower + upper + numbers + special_characters
+length = 16
+
+password = "".join(random.sample(string, length))
+
+print('Your password is' + password)
+
+
+
+
+# Password Validator
+
+''' password should not exceed 19 characters.
+    password should not be less than 8 characters.
+    password should have at least one uppercase and lowercase.
+    password should have at least one special character and one digit. '''
+
+def ValidPassword(password):
+    if len(password) > 8 and len(password) < 19:
+        num = False
+        lowerCase = False
+        upperCase = False
+        special_characters = False
+
+        for char in password:
+            if char.isdigit():
+                num = True
+            if char.islower():
+                lowerCase = True
+            if char.isupper():
+                upperCase = True
+            if char in '!@#$%^&*()':
+                special_characters = True
+
+        return num and lowerCase and upperCase and special_characters
+    else:
+        return False
+
+# Test the validator
+password = input('Enter password: ')
+if ValidPassword(password):
+    print('Valid password')
+else:
+    print('Invalid password')
